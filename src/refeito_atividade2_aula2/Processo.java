@@ -10,6 +10,7 @@ package refeito_atividade2_aula2;
  * @author Senac Sistemas
  */
 public class Processo {
+
     private int tempoEx;
     private int id;
     private int tipoProc;
@@ -25,11 +26,15 @@ public class Processo {
     public int getTipoProc() {
         return tipoProc;
     }
-    
-    Processo(Integer id){
-        this.tipoProc = (int)(Math.random()*2);
-        this.tempoEx = (int)(Math.random()*6);
+
+    Processo(Integer id) {
+        this.tipoProc = (int) (Math.random() * 2);
+        this.tempoEx = (int) (Math.random() * 6);
         this.id = id;
-        
+
+    }
+
+    void setTime(int i) {
+        this.tempoEx = i;
     }
 }

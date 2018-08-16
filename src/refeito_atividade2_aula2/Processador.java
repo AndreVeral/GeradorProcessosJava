@@ -16,6 +16,7 @@ import java.util.concurrent.TimeUnit;
 public class Processador {
 
     private List<Object> processosExec;
+    private int tempoEspera;
 
     Processador() {
         this.processosExec = new ArrayList<>();
@@ -34,9 +35,29 @@ public class Processador {
             System.out.println("Processos Encerrados"
                     + this.processosExec.size());
         } while (listaProcessos.size() > 0);
-        
+
         System.out.println("Finalizado");
 
     }
 
+    public void ExecutarProcessosRound() throws InterruptedException {
+        int quantum = 2;
+        //percorrer a lista
+        //verificar se cada processo da lista tem um tempo maior que quantum
+        //1caso tenha, sleep quantum, diminuir tempo exec do processo, jogar no 
+        //final da fila
+        //2caso não tenha, executa tmp processo, joga lista finalizados
+        while(!this.processosExec.isEmpty()){
+            Processo proc = this.processosExec.remove(0);
+            
+            if(proc.time > quantum){
+                TimeUnit.SECONDS.sleep(quantum);
+                proc.setTime(proc.time-quantum);
+                this.processosExec.add(proc);
+        }else{
+                TimeUnit.SECONDS.sleep(proc.time);
+                proc.setTime(0);
+                this.listProcessosExecutados.add(proc);
+            }
+    }
 }
